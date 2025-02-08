@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    environment {
+        IMAGE_NAME = "minthcm/minthcm"      // Update with your correct image
+        CONTAINER_NAME = "minthcm-web"      // Update with your correct container name
+    }
+
     stages {
         stage('Clone Repository') {
             steps {
@@ -9,17 +14,29 @@ pipeline {
             }
         }
 
-        stage('Build') {
+        stage('Build Docker Image') {
             steps {
-                echo "Building application..."
+                sh "docker build -t $IMAGE_NAME ."
             }
         }
 
-        stage('Deploy') {
+        stage('Stop & Remove Old Container') {
             steps {
-                echo "Deploying application..."
+                sh '''
+                docker stop $CONTAINER_NAME || true
+                docker rm $CONTAINER_NAME || true
+                '''
+            }
+        }
+
+        stage('Run New Container') {
+            steps {
+                sh '''
+                docker run -d -p 80:80 --name minthcm-web minthcm/minthcm
+                '''
             }
         }
     }
 }
+
 
