@@ -3,7 +3,7 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = "minthcm/minthcm"      // Update with your correct image
+        IMAGE_NAME = "minthcm/minthcm:latest"      // Update with your correct image
         CONTAINER_NAME = "minthcm-web"      // Update with your correct container name
     }
 
@@ -33,7 +33,7 @@ pipeline {
         stage('Run New Container') {
             steps {
                 sh '''
-                docker run -d -p 80:80 --name minthcm-web minthcm/minthcm
+                docker run -d -p 80:80 --name CONTAINER_NAME IMAGE_NAME
                 '''
             }
         }
