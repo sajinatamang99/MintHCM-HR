@@ -17,8 +17,8 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh "docker build -t $IMAGE_NAME ."
-            }
+                sh "docker build -t minthcm/minthcm:latest -f docker/Dockerfile ."
+            }   
         }
 
         stage('Stop & Remove Old Container') {
