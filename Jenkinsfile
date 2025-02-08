@@ -4,8 +4,22 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git branch: 'main', url: 'https://github.com/sajinatamang99/MintHCM-HR.git'
+                echo "Cloning repository..."
+                checkout scm
+            }
+        }
+
+        stage('Build') {
+            steps {
+                echo "Building application..."
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo "Deploying application..."
             }
         }
     }
 }
+
