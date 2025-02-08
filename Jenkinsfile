@@ -1,4 +1,4 @@
-#this is test
+// this is test
 pipeline {
     agent any
 
