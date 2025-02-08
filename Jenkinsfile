@@ -1,4 +1,4 @@
-#Steps for Jenkins pipeline
+#Steps for Jenkins pipelines
 pipeline {
     agent any
 
