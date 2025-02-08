@@ -3,8 +3,10 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = "myapp"  // Name of your Docker image
+        IMAGE_NAME = "minthcm/minthcm"  // Name of your Docker image
         CONTAINER_NAME = "myapp_container"
+        GITHUB_REPO = "https://github.com/sajinatamang99/MintHCM-HR.git"
+        BRANCH_NAME = "master" // Change to the correct branch if needed
     }
 
     stages {
@@ -16,7 +18,7 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t $minthcm .'
+                sh 'docker build -t $minthcm/minthcm .'
             }
         }
 
@@ -31,7 +33,7 @@ pipeline {
 
         stage('Run New Container') {
             steps {
-                sh 'docker run -d -p 80:80 --name $minthcm-web $minthcm'
+                sh 'docker run -d -p 80:80 --name $minthcm-web $minthcm/minthcm'
             }
         }
     }
