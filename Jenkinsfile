@@ -6,7 +6,7 @@ pipeline {
         IMAGE_NAME = "minthcm/minthcm"  // Name of your Docker image
         CONTAINER_NAME = "myapp_container"
         GITHUB_REPO = "https://github.com/sajinatamang99/MintHCM-HR.git"
-        BRANCH_NAME = "master" // Change to the correct branch if needed
+        BRANCH_NAME = "master" // Change to the correct branch if needed error
     }
 
     stages {
