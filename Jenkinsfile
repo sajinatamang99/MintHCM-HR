@@ -6,6 +6,9 @@ pipeline {
         IMAGE_NAME = "minthcm/minthcm:latest"      // Update with your correct image
         CONTAINER_NAME = "minthcm-web"      // Update with your correct container name
     }
+    tools {
+        sonarQubeScanner 'SonarScanner'
+    }
 
     stages {
         stage('Clone Repository') {
@@ -35,6 +38,25 @@ pipeline {
                 sh '''
                 docker run -d -p 80:80 --name $CONTAINER_NAME $IMAGE_NAME
                 '''
+            }
+        }
+        stage('SonarQube Analysis') {
+            steps {
+                withSonarQubeEnv('SonarQube') {
+                    sh 'sonar-scanner \
+                    -Dsonar.projectKey=php-app \
+                    -Dsonar.host.url=http://ec2-18-170-212-19.eu-west-2.compute.amazonaws.com:9000
+                }
+            }
+        }
+
+        stage('Quality Gate') {
+            steps {
+                script {
+                    timeout(time: 5, unit: 'MINUTES') {
+                        waitForQualityGate abortPipeline: true
+                    }
+                }
             }
         }
     }
