@@ -5,11 +5,8 @@ pipeline {
     environment {
         IMAGE_NAME = "minthcm/minthcm:latest"      // Update with your correct image
         CONTAINER_NAME = "minthcm-web"      // Update with your correct container name
+        SCANNER_HOME = tool 'SonarScanner'
     }
-    tools {
-        sonarQubeScanner 'SonarScanner'
-    }
-
     stages {
         stage('Clone Repository') {
             steps {
