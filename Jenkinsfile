@@ -41,7 +41,7 @@ pipeline {
             steps {
                 withSonarQubeEnv('SonarQube') {
                     sh '/opt/sonar-scanner/bin/sonar-scanner \
-                    sonar-scanner \
+                    -Dsonar.sources=. \
                     -Dsonar.projectKey=php-app \
                     -Dsonar.host.url=http://ec2-18-170-212-19.eu-west-2.compute.amazonaws.com:9000'
                 }
