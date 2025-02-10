@@ -40,7 +40,8 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('SonarQube') {
-                    sh 'sonar-scanner \
+                    sh '/opt/sonar-scanner/bin/sonar-scanner \
+                    sonar-scanner \
                     -Dsonar.projectKey=php-app \
                     -Dsonar.host.url=http://ec2-18-170-212-19.eu-west-2.compute.amazonaws.com:9000'
                 }
