@@ -37,6 +37,14 @@ pipeline {
                 '''
             }
         }
+        stage('Trivy Scan') {
+            steps {
+                script {
+                    // Run Trivy vulnerability scan on the built Docker image
+                    sh 'trivy image --no-progress --exit-code 1 --severity HIGH,CRITICAL minthcm/minthcm:latest'
+                }
+            }
+        }
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('SonarQube') {
